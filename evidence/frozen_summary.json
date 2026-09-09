@@ -1,0 +1,65 @@
+{
+  "development": {
+    "experiment_id": "20260727T024454Z-cp06-ledoit-wolf-risk-vol15-ff669921",
+    "period": {
+      "start": "2023-07-01T00:00:00Z",
+      "end": "2025-12-31T23:00:00Z"
+    },
+    "cost_scenarios": {
+      "7bps": {
+        "total_return": 0.6482802013795106,
+        "cagr": 0.22078298571776678,
+        "sharpe": 1.6225211471315817,
+        "maximum_drawdown": -0.15333399490485533
+      },
+      "14bps": {
+        "total_return": 0.5386105144111464,
+        "cagr": 0.18768561361002556,
+        "sharpe": 1.3660549702814158,
+        "maximum_drawdown": -0.17673344394674428
+      },
+      "28bps": {
+        "total_return": 0.31927114047445326,
+        "cagr": 0.11695886122715682,
+        "sharpe": 0.8454415877939877,
+        "maximum_drawdown": -0.23615239912261388
+      }
+    },
+    "data_manifest_sha256": "c34bb482775c1b15e57122437dc427ba172c74e3e25ddc60e0bed49cc4d459cb",
+    "signal_sha256": "7ed62ceb249a82ad648b9dc22ee02504fde16af5327bc9c8ee1f15c60240568c"
+  },
+  "terminal": {
+    "experiment_id": "20260727T030404Z-cp07-locked-terminal-evaluation-1159d47a",
+    "period": {
+      "start": "2026-01-01T00:00:00Z",
+      "end": "2026-06-30T23:00:00Z"
+    },
+    "cost_scenarios": {
+      "7bps": {
+        "total_return": 0.04121980604546871,
+        "sharpe": 0.6543793722200619,
+        "maximum_drawdown": -0.06984061393882723
+      },
+      "14bps": {
+        "total_return": 0.02732436445268549,
+        "sharpe": 0.4572672373857368,
+        "maximum_drawdown": -0.07363495798767827
+      },
+      "28bps": {
+        "total_return": -0.00046651873287439916,
+        "sharpe": 0.06474460796536714,
+        "maximum_drawdown": -0.08127666659820221
+      }
+    },
+    "attribution_7bps_usd": {
+      "market_pnl": 1446.69,
+      "funding_pnl": 53668.56,
+      "trading_cost": 13895.44,
+      "net_pnl": 41219.81
+    },
+    "mean_reversion_trades": 0,
+    "is_pristine_holdout": false,
+    "parameters_changed_after_evaluation": false
+  }
+}
+

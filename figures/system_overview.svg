@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="510" viewBox="0 0 1400 510" role="img" aria-labelledby="title desc">
+  <title id="title">Crypto perpetual relative-value research system</title>
+  <desc id="desc">A point-in-time pipeline from verified archives through signals, portfolio controls, execution, accounting, and evidence.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f5f7f7; }
+      .title { font: 700 34px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #162733; }
+      .sub { font: 400 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #607585; }
+      .box { fill: #ffffff; stroke: #b9c7cf; stroke-width: 2; rx: 10; }
+      .head { font: 700 17px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #162733; }
+      .copy { font: 400 14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #607585; }
+      .arrow { stroke: #1f607b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .accent-blue { fill: #1f607b; }
+      .accent-gold { fill: #c88d27; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f607b"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="510"/>
+  <text class="title" x="55" y="58">From point-in-time contracts to accountable P&amp;L</text>
+  <text class="sub" x="55" y="90">One research clock connects data, signals, portfolio risk, execution, funding, and evidence.</text>
+
+  <g transform="translate(55 145)">
+    <rect class="box" width="205" height="135"/>
+    <rect class="accent-blue" width="205" height="9"/>
+    <text class="head" x="18" y="42">Verified archives</text>
+    <text class="copy" x="18" y="72">Klines · mark prices</text>
+    <text class="copy" x="18" y="95">Funding · lifecycle</text>
+    <text class="copy" x="18" y="118">Checksums · coverage</text>
+  </g>
+  <path class="arrow" d="M270 212 H300"/>
+
+  <g transform="translate(310 145)">
+    <rect class="box" width="205" height="135"/>
+    <rect class="accent-blue" width="205" height="9"/>
+    <text class="head" x="18" y="42">Historical universe</text>
+    <text class="copy" x="18" y="72">Weekly eligible set</text>
+    <text class="copy" x="18" y="95">Listing age · liquidity</text>
+    <text class="copy" x="18" y="118">Decision-time data only</text>
+  </g>
+  <path class="arrow" d="M525 212 H555"/>
+
+  <g transform="translate(565 145)">
+    <rect class="box" width="230" height="135"/>
+    <rect class="accent-gold" width="230" height="9"/>
+    <text class="head" x="18" y="42">Relative-value sleeves</text>
+    <text class="copy" x="18" y="72">Sparse mean reversion</text>
+    <text class="copy" x="18" y="95">Cross-sectional funding carry</text>
+    <text class="copy" x="18" y="118">Past-only state updates</text>
+  </g>
+  <path class="arrow" d="M805 212 H835"/>
+
+  <g transform="translate(845 145)">
+    <rect class="box" width="205" height="135"/>
+    <rect class="accent-blue" width="205" height="9"/>
+    <text class="head" x="18" y="42">Portfolio risk</text>
+    <text class="copy" x="18" y="72">Pair · symbol · overlap</text>
+    <text class="copy" x="18" y="95">Gross exposure</text>
+    <text class="copy" x="18" y="118">Holdings covariance</text>
+  </g>
+  <path class="arrow" d="M1060 212 H1090"/>
+
+  <g transform="translate(1100 145)">
+    <rect class="box" width="245" height="135"/>
+    <rect class="accent-blue" width="245" height="9"/>
+    <text class="head" x="18" y="42">Lifecycle &amp; execution</text>
+    <text class="copy" x="18" y="72">Next eligible open</text>
+    <text class="copy" x="18" y="95">Whole-pair availability</text>
+    <text class="copy" x="18" y="118">Known-event exits</text>
+  </g>
+
+  <path class="arrow" d="M1222 290 V330 H1025"/>
+  <g transform="translate(760 330)">
+    <rect class="box" width="265" height="125"/>
+    <rect class="accent-gold" width="265" height="9"/>
+    <text class="head" x="18" y="42">Funding &amp; costs</text>
+    <text class="copy" x="18" y="72">Positions held at event time</text>
+    <text class="copy" x="18" y="98">Frozen-path cost scenarios</text>
+  </g>
+  <path class="arrow" d="M750 392 H715"/>
+  <g transform="translate(430 330)">
+    <rect class="box" width="275" height="125"/>
+    <rect class="accent-blue" width="275" height="9"/>
+    <text class="head" x="18" y="42">P&amp;L lineage</text>
+    <text class="copy" x="18" y="72">Sleeve → pair → symbol</text>
+    <text class="copy" x="18" y="98">Market + funding − cost</text>
+  </g>
+  <path class="arrow" d="M420 392 H385"/>
+  <g transform="translate(90 330)">
+    <rect class="box" width="285" height="125"/>
+    <rect class="accent-blue" width="285" height="9"/>
+    <text class="head" x="18" y="42">Reconciled evidence</text>
+    <text class="copy" x="18" y="72">Independent checks</text>
+    <text class="copy" x="18" y="98">Immutable evaluation records</text>
+  </g>
+</svg>
