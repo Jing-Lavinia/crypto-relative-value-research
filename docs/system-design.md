@@ -13,6 +13,11 @@ hourly kline rows. Historical eligibility is recalculated at 157 weekly refits.
 Each refit selects 20 contracts from information available at that timestamp;
 the historical union contains 150 contracts.
 
+The object manifest contains 16,078 monthly kline archives, 5,057 monthly and
+40 daily mark-price archives, and 4,876 monthly funding-rate archives. Across
+3,140 accepted active contract-weeks, minimum kline/mark join coverage was 100%
+and the maximum funding-record gap was eight hours.
+
 ## Decision clock
 
 ```text

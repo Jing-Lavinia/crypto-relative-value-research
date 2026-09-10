@@ -19,6 +19,7 @@ signal or sizing process under each cost assumption.
 - 20 of 30 calendar months were profitable.
 - 6 of 10 calendar quarters were profitable.
 - Partial 2023 returned +31.73%; 2024 returned +32.08%; 2025 returned -5.27%.
+- 66.47% of rolling 90-day windows were positive at the 7 bps baseline.
 - Maximum profitable-pair concentration was 2.36%, measured as the largest
   positive pair P&L divided by total positive pair P&L.
 - Realized volatility at 7 bps was 12.80%.

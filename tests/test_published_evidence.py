@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -65,3 +66,26 @@ def test_published_scale_and_governance_are_explicit():
         "reviewed_practical_thresholds"
     )
     assert evidence["development"]["original_performance_gates_all_passed"] is False
+
+
+def test_data_manifest_object_counts_reconcile():
+    evidence = json.loads(
+        (ROOT / "evidence" / "frozen_summary.json").read_text()
+    )
+    data = evidence["data_state"]
+    component_total = (
+        data["kline_monthly_objects"]
+        + data["mark_price_monthly_objects"]
+        + data["mark_price_daily_objects"]
+        + data["funding_rate_monthly_objects"]
+    )
+    assert component_total == data["verified_official_objects"]
+
+
+def test_restored_figure_hashes_match_frozen_evidence():
+    evidence = json.loads(
+        (ROOT / "evidence" / "frozen_summary.json").read_text()
+    )
+    for filename, expected in evidence["published_figure_sha256"].items():
+        payload = (ROOT / "figures" / filename).read_bytes()
+        assert hashlib.sha256(payload).hexdigest() == expected

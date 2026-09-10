@@ -67,6 +67,20 @@ The frozen research state was built from:
   timing, lifecycle, execution, exposure, accounting, metrics, and immutable
   evaluation records.
 
+The 26,051-object manifest joins three economically different data families:
+
+| Historical source | Verified objects | Research role |
+|---|---:|---|
+| Hourly klines | 16,078 monthly archives | Universe liquidity, execution prices, market P&L |
+| Hourly mark prices | 5,057 monthly + 40 daily archives | Intrahour adverse marks and liquidation-buffer checks |
+| Funding rates | 4,876 monthly archives | Event-time funding cash flows and carry ranking |
+| **Combined manifest** | **26,051** | Object key, published checksum, local checksum, size, processing record |
+
+Across the 3,140 accepted active contract-weeks, minimum kline/mark join
+coverage was 100% and the maximum observed gap between funding records was
+eight hours. Rare zero-volume hours remain in the data and are handled by the
+execution engine instead of being silently removed.
+
 ```text
 verified historical archives
   → point-in-time eligible universe
@@ -98,6 +112,20 @@ position-aware Ledoit–Wolf covariance scaling. The covariance estimate uses
 past returns and current holdings; its lookback, target, and sizing parameters
 remain private.
 
+### Research decisions retained in the frozen system
+
+Several economically distinct alternatives were evaluated against the same
+timing, turnover, cost, and portfolio controls. The frozen system retains only
+the components supported by that review.
+
+| Research branch | System-level evidence | Frozen decision |
+|---|---|---|
+| Broader relationship sets | More candidates increased deployment but mainly added turnover and noise | Retain sparse, FDR-controlled mean reversion |
+| Cross-sectional price momentum | Gross market and funding P&L did not survive turnover costs | Exclude from the frozen portfolio |
+| Cross-sectional funding carry | Produced the strongest valid standalone opportunity set | Retain as the active second sleeve |
+| Combined sleeves | Mean reversion diversified parts of the development path inside the shared risk engine | Freeze the combined development candidate |
+| Lower risk targeting | Removed profitable deployments without sufficiently improving the worst drawdown | Not retained; further tuning stopped |
+
 ## Execution and accounting
 
 A state update formed at close `t` can first alter holdings at the next
@@ -120,6 +148,21 @@ The executable [synthetic example](examples/synthetic_end_to_end.py) implements
 a selected subset of these controls without exposing the private signal model
 or empirical data.
 
+## Evidence protocol
+
+```mermaid
+flowchart LR
+    A["Development<br/>Jul 2023–Dec 2025<br/>research decisions"] --> B["Freeze<br/>configuration, signals,<br/>data and code hashes"]
+    B --> C["Locked terminal evaluation<br/>Jan–Jun 2026<br/>one-time use"]
+    C --> D["Prospective monitoring<br/>new observations only<br/>no terminal retuning"]
+```
+
+| Evidence layer | Hours | Permitted use | Interpretation |
+|---|---:|---|---|
+| Development | 21,959 | Research selection and frozen-path cost repricing | Main body of simulated evidence |
+| Locked terminal | 4,343 | One-time evaluation; no subsequent parameter change | Additional evidence, but not a pristine holdout |
+| Prospective | Not started | Predeclared monitoring only | Required for genuinely new evidence |
+
 ## Development evidence
 
 ![Development evidence](figures/development_evidence.png)
@@ -130,13 +173,38 @@ or empirical data.
 | 14 bps | +53.86% | 18.77% | 1.37 | -17.67% |
 | 28 bps | +31.93% | 11.70% | 0.85 | -23.62% |
 
-The result was not uniform across time: 20 of 30 calendar months and 6 of 10
-calendar quarters were profitable, while 2025 returned -5.27%. Removing the
-best development day leaves 20.31% CAGR and 1.55 Sharpe; removing the best
-three days leaves 17.80% CAGR and 1.40 Sharpe. Maximum profitable-pair
-concentration—the largest positive pair P&L divided by total positive pair
-P&L—was 2.36%, and frozen-path one-way cost break-even was approximately 48.38
-bps.
+### Cost sensitivity through time
+
+![Development equity by transaction cost](figures/development_equity_by_cost.png)
+
+The cost scenarios reprice the same frozen position path. They do not rerun
+pair selection or sizing. Higher friction reduces both terminal wealth and the
+ability to recover from the 2025 drawdown.
+
+### Time consistency
+
+![Development monthly returns](figures/development_monthly_returns.png)
+
+The result was not uniform across time. Twenty of 30 calendar months and six of
+ten calendar quarters were profitable, but 2025 returned -5.27% after partial
+2023 returned +31.73% and 2024 returned +32.08%.
+
+### Robustness summary
+
+| Check | Frozen result | What it tests |
+|---|---|---|
+| Remove best development day | 20.31% CAGR, 1.55 Sharpe | Dependence on one observation |
+| Remove best three days | 17.80% CAGR, 1.40 Sharpe | Dependence on a small number of strong observations |
+| Positive rolling 90-day windows | 66.47% | Persistence across overlapping regimes |
+| Moving-block bootstrap | 2,000 samples, five-day blocks; 99.45% cumulatively positive | Dependence-aware resampling |
+| Bootstrap 95% intervals | CAGR 4.22%–41.80%; Sharpe 0.39–2.81 | Statistical uncertainty |
+| Approximate 18-trial deflated Sharpe | 82.65% | Multiple-research-trial adjustment |
+| Maximum profitable-pair concentration | 2.36% | Reliance on one winning pair |
+| Frozen-path one-way cost break-even | Approximately 48.38 bps | Friction tolerance without changing holdings |
+
+Profitable-pair concentration is the largest positive pair P&L divided by total
+positive pair P&L. The bootstrap and deflated-Sharpe checks reduce neither the
+development status of the sample nor the need for prospective evidence.
 
 Bootstrap definitions, yearly evidence, and the complete interpretation
 boundary are recorded in
@@ -155,6 +223,11 @@ boundary are recorded in
 On $1 million initial capital, the 7 bps ledger attributes approximately
 +$1.45k to market movement, +$53.67k to funding, and -$13.90k to trading costs,
 for +$41.22k net P&L. No mean-reversion pair traded in this window.
+
+Four of six terminal months were positive. Q1 returned -2.08%, Q2 returned
++6.34%, and 74.67% of rolling 90-day windows were positive. At 28 bps, the
+six-month path missed break-even by approximately $467 per $1 million initial
+capital.
 
 The portfolio remained positive at 7 and 14 bps, but the terminal result did
 not independently validate the inactive mean-reversion sleeve. The window had
@@ -175,6 +248,15 @@ Ledoit–Wolf estimator, margin and liquidation engine, raw market data, complet
 promotion pipeline, or the implementation that generated the reported
 results.
 
+| System layer | Public executable boundary | Retained privately |
+|---|---|---|
+| Information and universe | Past-only observations, listing age, completeness, ranked eligibility | Archive ingestion, full manifests, full empirical tables |
+| Signals | Replaceable deterministic target interface | Features, lags, thresholds, acceptance rules, empirical signal state |
+| Portfolio | Pair, symbol, overlap, and total-gross caps | Ledoit–Wolf estimation, margin and liquidation controls, sizing parameters |
+| Execution | Strict next-open timing and whole-pair availability | Full hourly market path and empirical execution records |
+| Accounting | Leg ledger, funding, turnover cost, symbol aggregation, reconciliation | Complete empirical ledgers and independent SQL database |
+| Audit | Deterministic hashes and immutable-write primitive | Run promotion, terminal lock, full configuration and artifact registry |
+
 ```bash
 python -m pip install -e ".[dev]"
 python examples/synthetic_end_to_end.py
@@ -192,6 +274,17 @@ src/perpetual_rv_demo/
   accounting.py          funding, cost, and P&L reconciliation
   audit.py               deterministic hashes and immutable record primitive
   pipeline.py            synthetic end-to-end orchestration
+```
+
+The example output makes the exercised failure paths visible:
+
+```json
+{
+  "lifecycle_flattened_pairs": ["mr:AAA-BBB"],
+  "blocked_pairs": ["carry:CCC-DDD"],
+  "reconciliation_passed": true,
+  "audit_payload_sha256": "43a5c43d..."
+}
 ```
 
 The public tests cover this selected control boundary. The private empirical

@@ -1,6 +1,10 @@
 {
   "data_state": {
     "verified_official_objects": 26051,
+    "kline_monthly_objects": 16078,
+    "mark_price_monthly_objects": 5057,
+    "mark_price_daily_objects": 40,
+    "funding_rate_monthly_objects": 4876,
     "accepted_hourly_kline_rows": 11496302,
     "weekly_universe_refits": 157,
     "contracts_per_refit": 20,
@@ -45,9 +49,23 @@
       "profitable_quarters": 6,
       "calendar_quarters": 10,
       "return_2025": -0.0527,
+      "positive_rolling_90d_fraction": 0.664730541946563,
+      "moving_block_bootstrap_samples": 2000,
+      "moving_block_days": 5,
+      "bootstrap_cumulatively_positive_fraction": 0.9945,
+      "bootstrap_cagr_95pct_interval": [
+        0.0422,
+        0.418
+      ],
+      "bootstrap_sharpe_95pct_interval": [
+        0.39,
+        2.81
+      ],
+      "deflated_sharpe_probability_18_trials": 0.8265,
       "maximum_positive_pair_pnl_share": 0.02363847974621303,
       "frozen_path_one_way_cost_break_even_bps": 48.38
-    }
+    },
+    "observations": 21959
   },
   "terminal": {
     "experiment_id": "20260727T030404Z-cp07-locked-terminal-evaluation-1159d47a",
@@ -79,7 +97,17 @@
       "net_pnl": 41219.81
     },
     "mean_reversion_trades": 0,
+    "observations": 4343,
+    "profitable_months": 4,
+    "calendar_months": 6,
+    "q1_return": -0.0208,
+    "q2_return": 0.0634,
+    "positive_rolling_90d_fraction": 0.7466788822721027,
     "is_pristine_holdout": false,
     "parameters_changed_after_evaluation": false
+  },
+  "published_figure_sha256": {
+    "development_equity_by_cost.png": "cbdefaf441ce82aa0aa61ba017154ff6cce36d335fd5f6cb2a7ff278147cd991",
+    "development_monthly_returns.png": "7be20c710950e15ae34e00f1d5257673812b88c12b9255492489fb2829200f0c"
   }
 }

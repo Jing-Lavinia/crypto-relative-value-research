@@ -16,8 +16,8 @@ consumed, and no parameters were changed afterward.
 | 28 bps | -0.047% | -0.09% | 0.06 | -8.13% |
 
 Four of six months were positive. Q1 returned -2.08% and Q2 returned +6.34%.
-The annualized figures are descriptive because the evaluation covers only six
-months.
+The baseline positive rolling 90-day fraction was 74.67%. The annualized
+figures are descriptive because the evaluation covers only six months.
 
 ## Baseline attribution
 
