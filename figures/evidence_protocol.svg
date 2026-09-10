@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="420" viewBox="0 0 1400 420" role="img" aria-labelledby="title desc">
+  <title id="title">Research evidence protocol</title>
+  <desc id="desc">A four-stage evidence chain from development through a frozen research state and locked terminal evaluation to prospective monitoring.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f5f7f7; }
+      .title { font: 700 34px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #162733; }
+      .sub { font: 400 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #607585; }
+      .box { fill: #ffffff; stroke: #b9c7cf; stroke-width: 2; rx: 10; }
+      .head { font: 700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #162733; }
+      .copy { font: 400 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #607585; }
+      .note { font: 600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill: #1f607b; }
+      .arrow { stroke: #1f607b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .accent-blue { fill: #1f607b; }
+      .accent-gold { fill: #c88d27; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f607b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="420"/>
+  <text class="title" x="55" y="58">Evidence is separated by decision rights</text>
+  <text class="sub" x="55" y="90">Development selects the system; later observations evaluate the frozen research state.</text>
+
+  <g transform="translate(55 145)">
+    <rect class="box" width="275" height="145"/>
+    <rect class="accent-blue" width="275" height="9"/>
+    <text class="head" x="20" y="44">1 · Development</text>
+    <text class="copy" x="20" y="77">Jul 2023–Dec 2025</text>
+    <text class="copy" x="20" y="103">Research decisions permitted</text>
+    <text class="copy" x="20" y="127">21,959 hourly observations</text>
+  </g>
+  <path class="arrow" d="M340 218 H375"/>
+
+  <g transform="translate(385 145)">
+    <rect class="box" width="275" height="145"/>
+    <rect class="accent-gold" width="275" height="9"/>
+    <text class="head" x="20" y="44">2 · Freeze</text>
+    <text class="copy" x="20" y="77">Configuration and signals</text>
+    <text class="copy" x="20" y="103">Data and code hashes</text>
+    <text class="copy" x="20" y="127">Recorded before evaluation</text>
+  </g>
+  <path class="arrow" d="M670 218 H705"/>
+
+  <g transform="translate(715 145)">
+    <rect class="box" width="300" height="145"/>
+    <rect class="accent-gold" width="300" height="9"/>
+    <text class="head" x="20" y="44">3 · Locked terminal</text>
+    <text class="copy" x="20" y="77">Jan–Jun 2026</text>
+    <text class="copy" x="20" y="103">One-time evaluation</text>
+    <text class="copy" x="20" y="127">4,343 hourly observations</text>
+  </g>
+  <path class="arrow" d="M1025 218 H1060"/>
+
+  <g transform="translate(1070 145)">
+    <rect class="box" width="275" height="145"/>
+    <rect class="accent-blue" width="275" height="9"/>
+    <text class="head" x="20" y="44">4 · Prospective</text>
+    <text class="copy" x="20" y="77">New observations only</text>
+    <text class="copy" x="20" y="103">No terminal retuning</text>
+    <text class="copy" x="20" y="127">Monitoring not yet started</text>
+  </g>
+
+  <text class="note" x="55" y="350">Interpretation boundary</text>
+  <text class="copy" x="245" y="350">The terminal window adds evidence, but only prospective observations can create a genuinely new test.</text>
+</svg>

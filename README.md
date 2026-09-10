@@ -150,12 +150,7 @@ or empirical data.
 
 ## Evidence protocol
 
-```mermaid
-flowchart LR
-    A["Development<br/>Jul 2023–Dec 2025<br/>research decisions"] --> B["Freeze<br/>configuration, signals,<br/>data and code hashes"]
-    B --> C["Locked terminal evaluation<br/>Jan–Jun 2026<br/>one-time use"]
-    C --> D["Prospective monitoring<br/>new observations only<br/>no terminal retuning"]
-```
+![Evidence protocol](figures/evidence_protocol.svg)
 
 | Evidence layer | Hours | Permitted use | Interpretation |
 |---|---:|---|---|
