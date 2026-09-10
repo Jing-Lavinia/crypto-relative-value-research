@@ -16,9 +16,26 @@ def apply_portfolio_constraints(
     if equity <= 0:
         raise ValueError("equity must be positive")
 
-    pair_symbols: dict[str, set[str]] = defaultdict(set)
-    for pair_id, symbol in targets:
-        pair_symbols[pair_id].add(symbol)
+    all_pair_symbols: dict[str, set[str]] = defaultdict(set)
+    active_pair_symbols: dict[str, set[str]] = defaultdict(set)
+    for (pair_id, symbol), value in targets.items():
+        all_pair_symbols[pair_id].add(symbol)
+        if abs(float(value)) > 1e-12:
+            active_pair_symbols[pair_id].add(symbol)
+
+    malformed = {
+        pair_id: sorted(symbols)
+        for pair_id, symbols in active_pair_symbols.items()
+        if len(symbols) != 2
+    }
+    if malformed:
+        raise ValueError(f"active targets must contain two legs per pair: {malformed}")
+
+    pair_symbols = {
+        pair_id: symbols
+        for pair_id, symbols in all_pair_symbols.items()
+        if pair_id in active_pair_symbols
+    }
 
     accepted: set[str] = set()
     usage: Counter[str] = Counter()
@@ -62,4 +79,3 @@ def apply_portfolio_constraints(
         scale = total_limit / total_gross
         constrained = {key: value * scale for key, value in constrained.items()}
     return constrained
-

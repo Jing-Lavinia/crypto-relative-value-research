@@ -1,3 +1,5 @@
+import pytest
+
 from perpetual_rv_demo.execution import execute_whole_pairs
 from perpetual_rv_demo.portfolio import apply_portfolio_constraints
 
@@ -43,3 +45,14 @@ def test_zero_volume_carries_both_prior_legs():
     assert executed == previous
     assert blocked == {"p1"}
 
+
+def test_one_leg_target_is_rejected_before_execution():
+    with pytest.raises(ValueError, match="two legs"):
+        apply_portfolio_constraints(
+            {("p1", "AAA"): 10.0},
+            equity=100.0,
+            maximum_pair_gross=1.0,
+            maximum_symbol_gross=1.0,
+            maximum_total_gross=1.0,
+            maximum_pairs_per_symbol=2,
+        )

@@ -13,6 +13,14 @@ def execute_whole_pairs(
     for pair_id, symbol in set(targets) | set(previous):
         pair_symbols[pair_id].add(symbol)
 
+    malformed = {
+        pair_id: sorted(symbols)
+        for pair_id, symbols in pair_symbols.items()
+        if len(symbols) != 2
+    }
+    if malformed:
+        raise ValueError(f"execution requires two symbols per pair: {malformed}")
+
     executed: dict[tuple[str, str], float] = {}
     blocked: set[str] = set()
     for pair_id, symbols in sorted(pair_symbols.items()):
@@ -27,4 +35,3 @@ def execute_whole_pairs(
             key = (pair_id, symbol)
             executed[key] = float(targets.get(key, 0.0))
     return executed, blocked
-

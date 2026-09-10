@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 
+from .audit import stable_hash
 from .accounting import (
     aggregate_portfolio,
     aggregate_symbols,
@@ -17,7 +18,7 @@ from .universe import eligible_symbols
 
 
 def run_synthetic_pipeline() -> dict:
-    """Run a small example through the full public research-control boundary."""
+    """Run a small example through the selected public control boundary."""
     utc = timezone.utc
     decision_time = datetime(2026, 1, 5, 12, tzinfo=utc)
     market_opens = [decision_time, decision_time + timedelta(hours=1)]
@@ -51,9 +52,9 @@ def run_synthetic_pipeline() -> dict:
     sleeves, raw_targets = synthetic_signal_provider(eligible, decision_time)
     events = [
         {
-            "symbol": "ZZZ",
+            "symbol": "AAA",
             "announced_at": decision_time - timedelta(days=1),
-            "exit_at": decision_time,
+            "exit_at": decision_time + timedelta(days=1),
         }
     ]
     lifecycle_targets = flatten_known_inactive_pairs(
@@ -67,19 +68,25 @@ def run_synthetic_pipeline() -> dict:
         maximum_total_gross=0.60,
         maximum_pairs_per_symbol=2,
     )
+    previous = {
+        ("mr:AAA-BBB", "AAA"): 60_000.0,
+        ("mr:AAA-BBB", "BBB"): -60_000.0,
+        ("carry:CCC-DDD", "CCC"): 50_000.0,
+        ("carry:CCC-DDD", "DDD"): -50_000.0,
+    }
     positions, blocked = execute_whole_pairs(
         constrained,
-        previous={},
+        previous=previous,
         executable_volume={
             "AAA": 10.0,
             "BBB": 8.0,
             "CCC": 12.0,
-            "DDD": 9.0,
+            "DDD": 0.0,
         },
     )
     legs = build_leg_ledger(
         sleeve_by_pair=sleeves,
-        previous={},
+        previous=previous,
         current=positions,
         simple_returns={
             "AAA": 0.004,
@@ -98,13 +105,22 @@ def run_synthetic_pipeline() -> dict:
     symbols = aggregate_symbols(legs)
     portfolio = aggregate_portfolio(symbols)
     passed = reconcile(legs, symbols, portfolio)
-    return {
+    flattened_pairs = sorted(
+        {
+            pair_id
+            for (pair_id, symbol), target in raw_targets.items()
+            if target != lifecycle_targets[(pair_id, symbol)]
+        }
+    )
+    result = {
         "decision_time": decision_time.isoformat(),
         "execution_time": execution_time.isoformat(),
         "blocked_pairs": sorted(blocked),
+        "lifecycle_flattened_pairs": flattened_pairs,
         "eligible_symbols": sorted(eligible),
         "pair_legs": len(legs),
         "symbols": len(symbols),
         "portfolio": portfolio,
         "reconciliation_passed": passed,
     }
+    return {**result, "audit_payload_sha256": stable_hash(result)}

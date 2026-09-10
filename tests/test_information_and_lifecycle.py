@@ -42,6 +42,34 @@ def test_known_delisting_flattens_both_pair_legs():
     }
 
 
+def test_known_announcement_blocks_new_exposure_before_scheduled_exit():
+    now = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    targets = {("p1", "AAA"): 10.0, ("p1", "BBB"): -10.0}
+    events = [
+        {
+            "symbol": "AAA",
+            "announced_at": now - timedelta(hours=1),
+            "exit_at": now + timedelta(days=1),
+        }
+    ]
+    assert set(flatten_known_inactive_pairs(targets, events, now).values()) == {
+        0.0
+    }
+
+
+def test_future_announcement_does_not_change_current_targets():
+    now = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    targets = {("p1", "AAA"): 10.0, ("p1", "BBB"): -10.0}
+    events = [
+        {
+            "symbol": "AAA",
+            "announced_at": now + timedelta(hours=1),
+            "exit_at": now + timedelta(days=1),
+        }
+    ]
+    assert flatten_known_inactive_pairs(targets, events, now) == targets
+
+
 def test_future_observation_does_not_change_past_universe():
     now = datetime(2026, 1, 1, tzinfo=timezone.utc)
     base = [

@@ -2,11 +2,11 @@
 
 ## Data contract
 
-The private research system consumes hourly USD-M perpetual kline, mark-price,
-and funding archives. Each accepted object is tied to its official object key,
-published checksum, local checksum, size, and processing record. Duplicate
-timestamp-symbol keys, invalid OHLC rows, null fields, and insufficient active
-source coverage are rejected before research begins.
+The private research system consumes hourly Binance USD-M perpetual kline,
+mark-price, and funding archives. Each accepted object is tied to its official
+object key, published checksum, local checksum, size, and processing record.
+Duplicate timestamp-symbol keys, invalid OHLC rows, null fields, and
+insufficient active source coverage are rejected before research begins.
 
 The frozen data state contains 26,051 verified objects and 11,496,302 accepted
 hourly kline rows. Historical eligibility is recalculated at 157 weekly refits.
@@ -33,10 +33,11 @@ the private signal definitions.
 
 ### Sparse mean reversion
 
-The private selection process uses past observations to form a representation,
-group related contracts, test relationships, control false discoveries, review
-stability, and maintain an evolving hedge state. Public documentation names
-the stages but omits feature definitions, thresholds, and parameter values.
+The private selection process uses past observations for PCA representation,
+DBSCAN grouping, Engle–Granger relationship tests, false-discovery-rate
+control, stability and half-life screens, and a past-only Kalman hedge state.
+Public documentation names the method classes but omits feature definitions,
+lags, thresholds, acceptance rules, and parameter values.
 
 ### Cross-sectional funding carry
 
@@ -49,8 +50,9 @@ trade and not a risk-free arbitrage claim.
 
 Both sleeves enter a shared portfolio engine. Controls cover pair gross,
 symbol gross, total gross, maximum active pairs, maximum pair overlap per
-symbol, position-aware covariance risk, maintenance margin, and a liquidation
-buffer. Scaling preserves pair hedge proportions.
+symbol, position-aware Ledoit–Wolf covariance risk, maintenance margin, and a
+liquidation buffer. Scaling preserves pair hedge proportions. Covariance
+lookbacks, targets, and sizing parameters remain private.
 
 ## Lifecycle and execution
 
@@ -75,4 +77,3 @@ paths must agree before evidence is eligible for promotion.
 Run directories are immutable, configurations and input states are hashed, and
 promotion recomputes the required checks. The locked terminal evaluation can
 be consumed once and cannot be used for later parameter selection.
-

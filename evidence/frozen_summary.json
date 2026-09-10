@@ -1,4 +1,13 @@
 {
+  "data_state": {
+    "verified_official_objects": 26051,
+    "accepted_hourly_kline_rows": 11496302,
+    "weekly_universe_refits": 157,
+    "contracts_per_refit": 20,
+    "historical_contract_union": 150,
+    "accepted_active_contract_weeks": 3140,
+    "private_automated_tests": 40
+  },
   "development": {
     "experiment_id": "20260727T024454Z-cp06-ledoit-wolf-risk-vol15-ff669921",
     "period": {
@@ -26,7 +35,19 @@
       }
     },
     "data_manifest_sha256": "c34bb482775c1b15e57122437dc427ba172c74e3e25ddc60e0bed49cc4d459cb",
-    "signal_sha256": "7ed62ceb249a82ad648b9dc22ee02504fde16af5327bc9c8ee1f15c60240568c"
+    "signal_sha256": "7ed62ceb249a82ad648b9dc22ee02504fde16af5327bc9c8ee1f15c60240568c",
+    "promotion_mode": "reviewed_practical_thresholds",
+    "original_performance_gates_all_passed": false,
+    "reviewed_before_terminal_evaluation": true,
+    "robustness": {
+      "profitable_months": 20,
+      "calendar_months": 30,
+      "profitable_quarters": 6,
+      "calendar_quarters": 10,
+      "return_2025": -0.0527,
+      "maximum_positive_pair_pnl_share": 0.02363847974621303,
+      "frozen_path_one_way_cost_break_even_bps": 48.38
+    }
   },
   "terminal": {
     "experiment_id": "20260727T030404Z-cp07-locked-terminal-evaluation-1159d47a",
@@ -62,4 +83,3 @@
     "parameters_changed_after_evaluation": false
   }
 }
-

@@ -9,7 +9,7 @@ consumed, and no parameters were changed afterward.
 
 ## Results
 
-| One-way cost plus historical funding | Total return | Descriptive annualized return | Sharpe | Maximum drawdown |
+| One-way cost plus historical realized funding | Total return | Descriptive annualized return | Sharpe | Maximum drawdown |
 |---|---:|---:|---:|---:|
 | 7 bps | +4.12% | 8.49% | 0.65 | -6.98% |
 | 14 bps | +2.73% | 5.59% | 0.46 | -7.36% |
@@ -38,4 +38,3 @@ No mean-reversion pair traded in the terminal period. The positive portfolio
 result therefore supports continued monitoring of the active funding-carry
 sleeve but does not independently validate mean reversion. The 28 bps path was
 approximately $467 below break-even per $1 million initial capital.
-
